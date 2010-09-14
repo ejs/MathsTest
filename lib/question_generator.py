@@ -1,24 +1,5 @@
 import random
 
-# categories
-# 0 - decimal number comparisons
-# 0a - uneven decimal comparisons
-# 1 - positive numbers
-# 1a - addition and subtraction
-# 1b - multiplication and devision
-# 1c - order and brackets
-# 2 - negative numbers
-# 2a - addition and subtraction
-# 2b - multiplication and devision
-# 2c - repeated negative multiplication
-# 3 - si units
-# 3a - multiplication and devision by powers of 10
-# 3b - converting between si magnitude regardless of base
-# 3c - comparison of different magnitude si units
-# 4 - rounding
-# 4a - rounding to whole numbers
-# 4b - rounding to d.p.
-# 4c - rounding to s.f.
 
 categories = []
 category_generators = {}
@@ -70,6 +51,27 @@ def category_0():
     answer = bool(a > b) == bool(goal == "bigger")
     return "Which is {0} a) {1} or b) {2}?".format(goal, a, b,), "a" if answer else "b"
 
+
+# categories
+# 0 - decimal number comparisons
+# 0a - uneven decimal comparison
+# 1 - positive numbers
+# 1a - addition and subtraction
+# 1b - multiplication and devision
+# 1c - order and brackets
+# 2 - negative numbers
+# 2a - addition and subtraction
+# 2b - multiplication and devisions
+# 2c - repeated negative multiplication
+# 2d - complex ordered questions with brackets and negatives
+# 3 - si units
+# 3a - multiplication and devision by powers of 10
+# 3b - converting between si magnitude regardless of base
+# 3c - comparison of different magnitude si units
+# 4 - rounding
+# 4a - rounding to whole numbers
+# 4b - rounding to d.p.
+# 4c - rounding to s.f.
 
 if __name__ == "__main__":
     for i in range(10):
