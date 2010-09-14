@@ -12,7 +12,7 @@ def hello():
 
 
 @myapp.post('/maths')
-def hello(name):
+def hello():
     return "You've passed"
 
 
