@@ -1,14 +1,22 @@
+import bottle
 from bottle import Bottle, run, view
+from lib.question_generator import generate_question, describe_category
 
 
+bottle.debug(True)
 myapp = Bottle()
 
 
 @myapp.route('/')
 @myapp.route('/maths')
-@view("mainpage")
+@view("questions")
 def hello():
-    return {"message":"welcome to maths"}
+    questions = {}
+    for i in range(5):
+        questions["0:{}".format(i)] = generate_question("0")[0]
+    for i in range(5):
+        questions["0a:{}".format(i)] = generate_question("0a")[0]
+    return {"questions":questions}
 
 
 @myapp.post('/maths')
