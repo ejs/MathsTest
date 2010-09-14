@@ -25,6 +25,7 @@ category_generators = {}
 category_descriptions = {}
 
 
+
 def _add_category(name, description):
     categories.append(name)
     def decorator(func):
@@ -44,23 +45,29 @@ def describe_category(category):
 
 @_add_category("0", "Decimal comparison")
 def category_0():
-    a = random.randint(0, 1000)/100
-    b = random.randrange(0, 1000)/100 
-    while b == a:
-        b = random.randrange(0, 1000)/100 
+    magnitude = random.choice([0.1, 1, 10, 100, 1000])
+    a = random.randint(0, 1000)
+    diff = int(random.triangular(-100, 100, 0))
+    while not diff:
+        diff = int(random.triangular(-100, 100, 0))
+    b = (a - diff)/magnitude
+    a = a/magnitude
     goal = random.choice(["bigger", "smaller"])
-    answer = bool(a > b) ^ bool(goal == "smaller")
-    return "Which is {0} a) {1:.2f} or b) {2:.2f}?".format(goal, a, b,), "a" if answer else "b"
+    answer = bool(a > b) == bool(goal == "bigger")
+    return "Which is {0} a) {1} or b) {2}?".format(goal, a, b,), "a" if answer else "b"
 
 
-@_add_category("0a", "Decimal comparison")
+@_add_category("0a", "Uneven decimal comparison")
 def category_0():
-    a = random.randint(0, 1000)/100
-    b = random.randrange(0, 1000)/100 
-    while b == a:
-        b = random.randrange(0, 1000)/100 
+    magnitude = random.choice([0.1, 1, 10, 100, 1000])
+    a = random.randint(0, 1000)
+    diff = int(random.triangular(-100, 100, 0))
+    while not diff:
+        diff = int(random.triangular(-100, 100, 0))
+    b = (a - diff/10)/magnitude
+    a = a/magnitude
     goal = random.choice(["bigger", "smaller"])
-    answer = bool(a > b) ^ bool(goal == "smaller")
+    answer = bool(a > b) == bool(goal == "bigger")
     return "Which is {0} a) {1} or b) {2}?".format(goal, a, b,), "a" if answer else "b"
 
 
