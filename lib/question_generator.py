@@ -7,6 +7,40 @@ category_descriptions = {}
 category_dependancy = {}
 
 
+class Question():
+    def __init__(self, question, answer, category, answer_form="string", answer_data="", guid=""):
+        self.guid = guid
+        self.question = question
+        self.answer = answer
+        self.category = category
+        self.answer_form = answer_form
+        self.answer_data = answer_data
+
+    def ask(self):
+        if self.answer_form == "single_choice":
+            q = "<select name='"+self.guid+"'>"
+            for i in self.answer_data:
+                q += "<option value={}>{}</option>".format(i, i)
+            q += "</select>"
+            return q
+        else:
+            return "<input name='"+self.guid+"'>"
+
+    def answer(self, answer):
+        pass
+
+
+def generate_questions(category, number):
+    for i in range(number):
+        q = category_generators[category]()
+        q.guid = category+":{}".format(i)
+        yield q
+
+
+def describe_category(category):
+    return category_descriptions[category]
+
+
 def _add_category(name, description, dependancy=[]):
     categories.append(name)
     category_dependancy[name] = dependancy
@@ -15,14 +49,6 @@ def _add_category(name, description, dependancy=[]):
         category_descriptions[name] = description
         return func
     return decorator
-
-
-def generate_question(category):
-    return category_generators[category]()
-
-
-def describe_category(category):
-    return category_descriptions[category]
 
 
 @_add_category("0", "Decimal comparison")
@@ -36,7 +62,7 @@ def category_0():
     a = a/magnitude
     goal = random.choice(["bigger", "smaller"])
     answer = bool(a > b) == bool(goal == "bigger")
-    return "Which is {0} a) {1} or b) {2}?".format(goal, a, b,), "a" if answer else "b"
+    return Question("Which is {}?".format(goal), "0" if answer else "1", "0", "single_choice", [a, b])
 
 
 @_add_category("0a", "Uneven length decimal comparison", ["0"])
@@ -50,7 +76,7 @@ def category_0():
     a = a/magnitude
     goal = random.choice(["bigger", "smaller"])
     answer = bool(a > b) == bool(goal == "bigger")
-    return "Which is {0} a) {1} or b) {2}?".format(goal, a, b,), "a" if answer else "b"
+    return Question("Which is {}?".format(goal), "0" if answer else "1", "0a", "single_choice", [a,b])
 
 
 # 1 - positive numbers

@@ -6,11 +6,13 @@
     <body>
         <h1>Here are some quick questions</h1>
         <form action="/questions" method="POST">
+%for categorie in questions:
             <ul>
-%for id, question in questions.items():
-                <li>{{question}}<input /></li>
+%for q in questions[categorie]:
+                <li>{{q.question}}{{!q.ask()}}</li>
 %end
             </ul>
+%end
             <input type="submit">
         </form>
     </body>
