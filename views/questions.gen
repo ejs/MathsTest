@@ -11,11 +11,11 @@
                 <li py:for="q in quizz[category]" py:choose="q.answer_form">
                     $q.question
 
-                    <select py:when="'single_choice'">
-                        <option py:for="i in q.answer_data">$i</option>
+                    <select py:when="'single_choice'" name="${q.category+':'+q.guid}">
+                        <option py:for="i in q.answer_data" value="$i">$i</option>
                     </select>
 
-                    <input py:otherwise="" type="text"/>
+                    <input py:otherwise="" type="text" name="${q.category+':'+q.guid}"/>
                 </li>
             </ul>
             <input type="submit" />
