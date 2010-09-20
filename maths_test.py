@@ -12,7 +12,7 @@ myapp = Bottle()
 @myapp.route('/')
 @myapp.route('/maths')
 def hello():
-    return loader.load("questions.gen").generate(questions=generate_quizz()).render('html', doctype="html5")
+    return loader.load("questions.gen").generate(quizz=generate_quizz()).render('html', doctype="html5")
 
 
 @myapp.post('/maths')

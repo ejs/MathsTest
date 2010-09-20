@@ -7,8 +7,16 @@
     <body>
         <h1>Here are some quick questions</h1>
         <form action="/questions" method="POST">
-            <ul py:for="category in questions">
-                <li py:for="q in questions[category]">$q.question ${q.ask()}</li>
+            <ul py:for="category in quizz">
+                <li py:for="q in quizz[category]" py:choose="q.answer_form">
+                    $q.question
+
+                    <select py:when="'single_choice'">
+                        <option py:for="i in q.answer_data">$i</option>
+                    </select>
+
+                    <input py:otherwise="" type="text"/>
+                </li>
             </ul>
             <input type="submit" />
         </form>

@@ -16,16 +16,6 @@ class Question():
         self.answer_form = answer_form
         self.answer_data = answer_data
 
-    def ask(self):
-        if self.answer_form == "single_choice":
-            q = "<select name='"+self.guid+"'>"
-            for i in self.answer_data:
-                q += "<option value={0}>{0}</option>".format(i, i)
-            q += "</select>"
-            return q
-        else:
-            return "<input name='"+self.guid+"'>"
-
     def answer(self, answer):
         pass
 
