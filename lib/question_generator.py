@@ -20,7 +20,7 @@ class Question():
         if self.answer_form == "single_choice":
             q = "<select name='"+self.guid+"'>"
             for i in self.answer_data:
-                q += "<option value={}>{}</option>".format(i, i)
+                q += "<option value={0}>{0}</option>".format(i, i)
             q += "</select>"
             return q
         else:
@@ -33,7 +33,7 @@ class Question():
 def generate_questions(category, number):
     for i in range(number):
         q = category_generators[category]()
-        q.guid = category+":{}".format(i)
+        q.guid = category+":{0}".format(i)
         yield q
 
 
@@ -53,7 +53,7 @@ def _add_category(name, description, dependancy=[]):
 
 @_add_category("0", "Decimal comparison")
 def category_0():
-    magnitude = random.choice([0.1, 1, 10, 100, 1000])
+    magnitude = random.choice([0.1, 1.0, 10.0, 100.0, 1000.0])
     a = random.randint(0, 1000)
     diff = int(random.triangular(-100, 100, 0))
     while not diff:
@@ -62,12 +62,12 @@ def category_0():
     a = a/magnitude
     goal = random.choice(["bigger", "smaller"])
     answer = bool(a > b) == bool(goal == "bigger")
-    return Question("Which is {}?".format(goal), "0" if answer else "1", "0", "single_choice", [a, b])
+    return Question("Which is {0}?".format(goal), "0" if answer else "1", "0", "single_choice", [a, b])
 
 
 @_add_category("0a", "Uneven length decimal comparison", ["0"])
 def category_0():
-    magnitude = random.choice([0.1, 1, 10, 100, 1000])
+    magnitude = random.choice([0.1, 1.0, 10.0, 100.0, 1000.0])
     a = random.randint(0, 1000)
     diff = int(random.triangular(-100, 100, 0))
     while not diff:
@@ -76,7 +76,7 @@ def category_0():
     a = a/magnitude
     goal = random.choice(["bigger", "smaller"])
     answer = bool(a > b) == bool(goal == "bigger")
-    return Question("Which is {}?".format(goal), "0" if answer else "1", "0a", "single_choice", [a,b])
+    return Question("Which is {0}?".format(goal), "0" if answer else "1", "0a", "single_choice", [a,b])
 
 
 # 1 - positive numbers
