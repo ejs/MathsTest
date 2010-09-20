@@ -1,4 +1,5 @@
 import random
+from model.questions import Question
 
 
 categories = []
@@ -7,23 +8,10 @@ category_descriptions = {}
 category_dependancy = {}
 
 
-class Question():
-    def __init__(self, question, answer, category, answer_form="string", answer_data="", guid=""):
-        self.guid = guid
-        self.question = question
-        self.answer = answer
-        self.category = category
-        self.answer_form = answer_form
-        self.answer_data = answer_data
-
-    def answer(self, answer):
-        pass
-
-
 def generate_questions(category, number):
     for i in range(number):
         q = category_generators[category]()
-        q.guid = category+":{0}".format(i)
+        q.guid = "{0}".format(i)
         yield q
 
 
