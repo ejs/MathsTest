@@ -1,0 +1,16 @@
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:py="http://genshi.edgewall.org/"
+        lang="en">
+    <head>
+        <title>Maths test</title>
+    </head>
+    <body>
+        <h1>Here are some quick questions</h1>
+        <form action="/questions" method="POST">
+            <ul py:for="category in questions">
+                <li py:for="q in questions[category]">$q.question ${q.ask()}</li>
+            </ul>
+            <input type="submit" />
+        </form>
+    </body>
+</html>

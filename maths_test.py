@@ -1,17 +1,18 @@
 import bottle
-from bottle import Bottle, run, view
+from bottle import Bottle, run
+from genshi.template import TemplateLoader
 from lib.quizz_master import generate_quizz
 
 
+loader = TemplateLoader(['views'], auto_reload=True)
 bottle.debug(True)
 myapp = Bottle()
 
 
 @myapp.route('/')
 @myapp.route('/maths')
-@view("questions")
 def hello():
-    return {"questions":generate_quizz()}
+    return loader.load("questions.gen").generate(questions=generate_quizz()).render('html', doctype="html5")
 
 
 @myapp.post('/maths')
