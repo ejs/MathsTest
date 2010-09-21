@@ -1,5 +1,17 @@
 import random
-from model.questions import Question
+
+
+class Question(object):
+    def __init__(self, question, answer, category, answer_form="string", answer_data="", guid=""):
+        self.guid = guid
+        self.question = question
+        self.answer = answer
+        self.category = category
+        self.answer_form = answer_form
+        self.answer_data = answer_data
+
+    def answer(self, answer):
+        pass
 
 
 categories = []

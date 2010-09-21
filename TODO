@@ -1,11 +1,12 @@
-Flesh out problem levels
-Build auto balancing problem setter
-    chain balancer by one level
-Handle multiple choice questions better
 Recieve and check questions
 Feedback results
 Summery sheet
-Allow workings to be entered
+
+Flesh out problem levels
+Build auto balancing problem setter
+    chain balancer by one level
+
 Add named sections to the display
 Improve display layout
-set to work behind other server
+
+Set to work behind other server

@@ -1,10 +1,11 @@
 import bottle
 from bottle import Bottle, run
 from genshi.template import TemplateLoader
-from lib.quizz_master import generate_quizz
+from model.questions import QuestionStore
 
 
 loader = TemplateLoader(['views'], auto_reload=True)
+data_store = QuestionStore('data/testdata.kvs')
 bottle.debug(True)
 myapp = Bottle()
 
@@ -12,7 +13,8 @@ myapp = Bottle()
 @myapp.route('/')
 @myapp.route('/maths')
 def hello():
-    return loader.load("questions.gen").generate(quizz=generate_quizz()).render('html', doctype="html5")
+    quizz = data_store.load_quizz("a").questions
+    return loader.load("questions.gen").generate(quizz=quizz).render('html', doctype="html5")
 
 
 @myapp.post('/maths')
