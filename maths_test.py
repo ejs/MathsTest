@@ -1,5 +1,5 @@
 import bottle
-from bottle import Bottle, run, redirect
+from bottle import Bottle, run, redirect, request
 from genshi.template import TemplateLoader
 from model.questions import QuestionStore
 
@@ -19,7 +19,19 @@ def hello():
 
 @myapp.post('/maths')
 def hello():
-    return redirect('/results')
+    data = request.forms
+    if "quizz.quizzid" in request:
+        quizz = data_store.load_quizz(data.get('quizz.quizzid'))
+        quizz.answers(data)
+
+        if quizz.all_answered():
+            data_store.save_quizz(quizz)
+            return redirect('/results')
+        else:
+             # return questions with answers and working pre-filled
+            return redirect('/maths')
+    else:
+        return redirect('/maths')
 
 
 @myapp.route('/results')

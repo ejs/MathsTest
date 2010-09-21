@@ -12,6 +12,7 @@
                     $q.question
 
                     <select py:when="'single_choice'" name="${q.category+':'+q.guid}">
+                        <option value="_"></option>
                         <option py:for="i in q.answer_data" value="$i">$i</option>
                     </select>
 
@@ -22,6 +23,7 @@
             </ul>
             <input type="hidden" value="quizz.quizzid"/>
             <input type="submit" />
+            <input type="reset" />
         </form>
     </body>
 </html>
