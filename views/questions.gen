@@ -7,8 +7,8 @@
     <body>
         <h1>Here are some quick questions</h1>
         <form action="/questions" method="POST">
-            <ul py:for="category in quizz">
-                <li py:for="q in quizz[category]" py:choose="q.answer_form">
+            <ul py:for="category in quizz.questions">
+                <li py:for="q in quizz.questions[category]" py:choose="q.answer_form">
                     $q.question
 
                     <select py:when="'single_choice'" name="${q.category+':'+q.guid}">
@@ -16,8 +16,11 @@
                     </select>
 
                     <input py:otherwise="" type="text" name="${q.category+':'+q.guid}"/>
+
+                    <textarea class="working" name="${'working:'+q.category+':'+q.guid}"/>
                 </li>
             </ul>
+            <input type="hidden" value="quizz.quizzid"/>
             <input type="submit" />
         </form>
     </body>

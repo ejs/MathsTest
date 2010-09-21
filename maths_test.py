@@ -13,7 +13,7 @@ myapp = Bottle()
 @myapp.route('/')
 @myapp.route('/maths')
 def hello():
-    quizz = data_store.load_quizz("a").questions
+    quizz = data_store.load_quizz("a")
     return loader.load("questions.gen").generate(quizz=quizz).render('html', doctype="html5")
 
 
