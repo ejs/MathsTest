@@ -1,5 +1,5 @@
 import bottle
-from bottle import Bottle, run
+from bottle import Bottle, run, redirect
 from genshi.template import TemplateLoader
 from model.questions import QuestionStore
 
@@ -19,6 +19,11 @@ def hello():
 
 @myapp.post('/maths')
 def hello():
+    return redirect('/results')
+
+
+@myapp.route('/results')
+def results():
     return "You've passed"
 
 
